@@ -1,0 +1,39 @@
+{% extends 'loans/base.html' %}
+
+{% block title %}Create Customer{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Create Customer</h2>
+    <form id="customerForm">
+        <label>Name:</label>
+        <input type="text" name="name" required>
+        <button type="submit">Create Customer</button>
+    </form>
+
+    <p id="responseMsg"></p>
+</div>
+
+<script>
+document.getElementById('customerForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const formData = new FormData(this);
+    fetch('/api/create-customer/', {
+        method: 'POST',
+        headers: { 'X-CSRFToken': '{{ csrf_token }}' },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.id){
+            document.getElementById('responseMsg').innerText = "Customer Created! ID: " + data.id;
+        } else {
+            document.getElementById('responseMsg').innerText = "Error: " + JSON.stringify(data);
+        }
+    })
+    .catch(err => {
+        document.getElementById('responseMsg').innerText = "Error submitting form.";
+    });
+});
+</script>
+{% endblock %}

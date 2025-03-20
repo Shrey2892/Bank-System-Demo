@@ -1,0 +1,43 @@
+{% extends 'loans/base.html' %}
+
+{% block title %}Loan Payment{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Make Payment</h2>
+    <form id="payment-form">
+        <label>Loan ID:</label>
+        <input type="text" name="loan_id" required>
+
+        <label>Payment Type:</label>
+        <select name="payment_type">
+            <option value="EMI">EMI</option>
+            <option value="LUMP_SUM">Lump Sum</option>
+        </select>
+
+        <label>Amount (For Lump Sum Only):</label>
+        <input type="text" name="amount">
+
+        <input type="submit" value="Pay">
+    </form>
+
+    <div id="payment-result"></div>
+</div>
+
+<script>
+document.getElementById('payment-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    fetch('/api/payment/', {
+        method: 'POST',
+        headers: { 'X-CSRFToken': '{{ csrf_token }}' },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('payment-result').innerHTML = `<strong>${data.message}</strong>`;
+    })
+    .catch(err => console.log(err));
+});
+</script>
+{% endblock %}

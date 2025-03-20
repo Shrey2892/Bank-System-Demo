@@ -1,0 +1,101 @@
+/* Base Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eef1f5; /* Soft neutral light gray */
+    margin: 0;
+    padding: 0;
+    color: #1c2a40; /* Dark cool navy for text */
+}
+
+/* Navbar */
+.navbar {
+    background-color: #1e3a8a; /* Slightly lighter Navy Blue */
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.navbar nav a {
+    color: white;
+    margin-left: 1.5rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+
+.navbar nav a:hover {
+    opacity: 0.85;
+}
+
+/* Content Cards */
+.main-content {
+    padding: 2rem;
+    max-width: 850px;
+    margin: 2rem auto;
+    background: #fdfdfd; /* Softer than stark white */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-radius: 12px;
+}
+
+/* Headings */
+h2 {
+    color: #1e3a8a; /* Matching navy tone */
+    margin-bottom: 1.2rem;
+    font-size: 1.8rem;
+}
+
+/* Form Fields */
+form input, form select, form button {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    border: 1px solid #b0bec5; /* Soft border color */
+    background-color: #f7f9fb; /* Slight blue-gray tone */
+    font-size: 1rem;
+    color: #1c2a40;
+}
+
+form input:focus, form select:focus {
+    border-color: #3b5998;
+    outline: none;
+    box-shadow: 0 0 5px rgba(30, 58, 138, 0.3);
+}
+
+/* Buttons */
+form button, input[type="submit"] {
+    background-color: #1e3a8a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover, input[type="submit"]:hover {
+    background-color: #284baf; /* Slightly lighter on hover */
+}
+
+/* Result Boxes */
+#result, #payment-result, #overview-result, #ledger-result {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border: 1px solid #cfd8dc;
+    background-color: #f1f3f6;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: #1e3a8a;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 0.9rem;
+}

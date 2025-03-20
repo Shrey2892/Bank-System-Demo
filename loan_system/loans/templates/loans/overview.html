@@ -1,0 +1,32 @@
+{% extends 'loans/base.html' %}
+
+{% block title %}Account Overview{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Account Overview</h2>
+
+    <label>Customer ID:</label>
+    <input type="text" id="customer-id">
+    <button onclick="fetchOverview()">Load Overview</button>
+
+    <div id="overview-result"></div>
+</div>
+
+<script>
+function fetchOverview() {
+    const customerId = document.getElementById('customer-id').value;
+    fetch(`/api/overview/${customerId}/`)
+    .then(response => response.json())
+    .then(data => {
+        let resultHtml = `<h3>Customer: ${data.customer_name}</h3><ul>`;
+        data.loans.forEach(loan => {
+            resultHtml += `<li>Loan ID: ${loan.loan_id}, Principal: ${loan.principal_amount}, Total: ${loan.total_amount}, Paid: ${loan.amount_paid}, EMIs Left: ${loan.emis_left}</li>`;
+        });
+        resultHtml += '</ul>';
+        document.getElementById('overview-result').innerHTML = resultHtml;
+    })
+    .catch(err => console.log(err));
+}
+</script>
+{% endblock %}

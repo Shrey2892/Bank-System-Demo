@@ -1,0 +1,45 @@
+{% extends 'loans/base.html' %}
+
+{% block title %}Give a Loan{% endblock %}
+
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+<div class="container">
+    <h2>Give a Loan</h2>
+    <form id="lend-form">
+        <label>Customer ID:</label>
+        <input type="text" name="customer_id" required>
+
+        <label>Loan Amount:</label>
+        <input type="text" name="loan_amount" required>
+
+        <label>Loan Period (Years):</label>
+        <input type="text" name="loan_period" required>
+
+        <label>Rate of Interest (%):</label>
+        <input type="text" name="rate_of_interest" required>
+
+        <input type="submit" value="Lend Loan">
+    </form>
+
+    <div id="result"></div>
+</div>
+
+<script>
+document.getElementById('lend-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    fetch('/api/lend/', {
+        method: 'POST',
+        headers: { 'X-CSRFToken': '{{ csrf_token }}' },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('result').innerHTML = `<strong>Loan Created!</strong><br>Total Amount: ${data.total_amount},<br> EMI: ${data.monthly_emi}`;
+    })
+    .catch(err => console.log(err));
+});
+</script>
+{% endblock %}

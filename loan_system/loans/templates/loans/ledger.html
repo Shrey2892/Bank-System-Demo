@@ -1,0 +1,40 @@
+{% extends 'loans/base.html' %}
+
+{% block title %}Loan Ledger{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Loan Ledger</h2>
+
+    <label>Loan ID:</label>
+    <input type="text" id="loan-id">
+    <button onclick="fetchLedger()">Load Ledger</button>
+
+    <div id="ledger-result"></div>
+</div>
+
+<script>
+function fetchLedger() {
+    const loanId = document.getElementById('loan-id').value;
+    fetch(`/api/ledger/${loanId}/`)
+    .then(response => response.json())
+    .then(data => {
+        let resultHtml = `
+            <p><strong>Principal:</strong> ${data.principal_amount}</p>
+            <p><strong>Total Amount:</strong> ${data.total_amount}</p>
+            <p><strong>Amount Paid:</strong> ${data.amount_paid}</p>
+            <p><strong>Balance:</strong> ${data.balance}</p>
+            <p><strong>Monthly EMI:</strong> ${data.monthly_emi}</p>
+            <p><strong>EMIs Left:</strong> ${data.emis_left}</p>
+            <h3>Transactions:</h3><ul>
+        `;
+        data.transactions.forEach(txn => {
+            resultHtml += `<li>${txn.transaction_date} - ${txn.transaction_type} - ${txn.amount}</li>`;
+        });
+        resultHtml += '</ul>';
+        document.getElementById('ledger-result').innerHTML = resultHtml;
+    })
+    .catch(err => console.log(err));
+}
+</script>
+{% endblock %}

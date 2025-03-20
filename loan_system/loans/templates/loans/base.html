@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Bank Loan System{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<header class="navbar">
+    <h1>MyBank Loan System</h1>
+    <nav>
+        <a href="{% url 'lend-page' %}">Lend Loan</a>
+        <a href="{% url 'payment-page' %}">Payment</a>
+        <a href="{% url 'overview-page' %}">Overview</a>
+        <a href="{% url 'ledger-page' %}">Ledger</a>
+    </nav>
+</header>
+
+<main class="main-content">
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="footer">
+    <p>&copy; 2025 MyBank. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
