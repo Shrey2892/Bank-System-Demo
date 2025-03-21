@@ -1,5 +1,5 @@
 1) The assignments.md Problem is implemented using Django Framework.
-2) The packages required for the Project is specified in requirements.txt file.Get it locally using command : pip install -r requirements.txt
+2) The packages required for the Project is specified in requirements.txt file.Get it locally using command : pip install -r requirements.txt.
 3) The app name for this is 'loans' and Project name is 'loan_system'.
 4) The Templates used for web views are specifies in loans/templates/loans.
 5) Both Web based Views and API View is specified in views.py of 'loans' folder.
